@@ -63,9 +63,11 @@ def test_bug(trace_gdf: gpd.GeoDataFrame):
 
     unary_result_srs = gpd.GeoSeries(list(unary_result.geoms), crs=trace_gdf.crs)
 
+    unary_result_path = Path(
+        f"results/unary_result_b{trace_count_original}_a{after_unary_length}.gpkg",
+    )
+    unary_result_path.parent.mkdir(parents=True, exist_ok=True)
     unary_result_srs.to_file(
-        Path(
-            f"results/unary_result_b{trace_count_original}_a{after_unary_length}.gpkg",
-        ),
+        unary_result_path,
         driver="GPKG",
     )
